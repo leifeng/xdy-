@@ -1,0 +1,132 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    background: #1091d2;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#root {
+    height: 90%;
+}
+
+.main {
+    height: 100%;
+}
+
+.top {
+    background: #1091d2;
+    height: 50px;
+    line-height: 50px;
+    font-size: 22px;
+    text-indent: 12px;
+    color: #fff;
+}
+
+.content {
+    height: 100%;
+}
+
+.content:after {
+    clear: both;
+}
+
+.leftMenu {
+    background-color: #f3f3f3;
+    border: 1px solid #ccc;
+    float: left;
+    width: 200px;
+    height: 100%;
+}
+
+.leftMenu ul {
+    text-align: center;
+}
+
+.leftMenu ul li {
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    border-top: 1px solid #fcfcfc;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.leftMenu ul span {
+    margin: 0 5px;
+}
+
+.rightContext {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    height: 100%;
+    margin-left: 200px;
+}
+.rightContext .index{
+    margin-top: 200px;
+    text-align: center;
+    font-size: 50px;
+}
+.rightContext .title{
+    color: #0e90d2;
+    font-size: 28px;
+    text-indent: 15px;
+    background-color: #fafafa;
+}
+.rightContext .frame {
+    height: 100%;
+}
+.rightContext .list{
+    overflow: auto;
+    height: 100%;
+}
+.rightContext .item{
+    float: left;
+    margin: 15px;
+    width: 200px;
+}
+.rightContext .item a{
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    margin: 10px 0;
+}
+.rightContext .item img{
+    width: 150px;
+    height: 150px;
+}
+/*------------------------------------*/
+.rightContext .admin{
+
+}
+.rightContext .admin .title{
+    background-color: #f3f3f3;
+    color:#666 ;
+}
+.rightContext .admin .menu {
+    text-indent: 15px;
+    background-color: #e2e2e2;
+    color:#999 ;
+}
+.rightContext .admin .menu a{
+    display: inline-block;
+    margin-right: 20px;
+    font-size: 16px;
+    text-decoration: underline;
+}
+.rightContext .admin .manage{
+
+}
+.clear{
+    clear: both;
+    height: 0;
+}
+.selected{
+    color: #095f8a;
+}
