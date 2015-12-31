@@ -6,7 +6,7 @@ export default class Main extends React.Component {
         return (
             <div className="main">
                 <div className="top">
-                    新大洋数据决策系统
+                    数据决策系统
                 </div>
                 <div className="content">
                     <Left/>
