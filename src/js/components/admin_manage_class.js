@@ -3,6 +3,7 @@ import { connect }from'react-redux';
 import {A_delClass_async, A_editClass_async,  A_addClass_async, A_setIsEdit, A_setClassId,A_reDelClass_async} from '../actions/actions.js'
 import AMUIReact from 'amazeui-react';
 const {Button,Icon,Input,List,ListItem,Badge} = AMUIReact;
+
 class manageClass extends React.Component {
 
     render() {
@@ -58,6 +59,10 @@ class manageClass extends React.Component {
         const {A_addClass_async}=this.props;
         const node = this.refs.input;
         const text = node.value.trim();
+        if(text==''){
+            alert('先输入类别名称！');
+            return
+        }
         A_addClass_async(text);
         node.value = '';
     }

@@ -27,7 +27,7 @@ export class App extends React.Component {
                     <Route path="/" component={Main}>
                         <IndexRoute component={Index}/>
                         <Route path="list/:classid" component={List}/>
-                        <Route path="info/:url" component={Info}/>
+                        <Route path="info/:listid" component={Info}/>
                         <Route path="admin" component={Admin}>
                             <Route path="manageClass" component={ManageClass}/>
                             <Route path="ManageData" component={ManageData}/>

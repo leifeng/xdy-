@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {A_getListAsync,A_addListAsync,A_getAsyncClass,A_delListAsync,A_listIsEdit} from '../actions/actions.js'
+import {A_getListAsync,A_addListAsync,A_getAsyncClass,A_delListAsync,A_listIsEdit,A_editListAsync} from '../actions/actions.js'
 import AMUIReact from 'amazeui-react';
 const {Button,Icon,Input,List,ListItem,Badge,ButtonToolbar,Table} = AMUIReact;
 
@@ -14,7 +14,8 @@ var EventRow = React.createClass({
                 <td>{item.name}</td>
                 <td>{item.url}</td>
                 <td>
-                    <a className="edit" data-id={item.Id}>编辑</a>&nbsp;
+                    <a className="edit" data-id={item.Id} data-classid={item.classid} data-name={item.name}
+                       data-url={item.url}>编辑</a>&nbsp;
                     <a className="del" data-id={item.Id}>删除</a>
                 </td>
             </tr>
@@ -27,9 +28,11 @@ class ManageData extends React.Component {
         super();
         console.log(props);
         this.state = {
+            listId: '',
             name: '',
             link: '',
-            classid: ''
+            classid: '',
+            btnTxt: '添加'
         }
     }
 
@@ -61,7 +64,8 @@ class ManageData extends React.Component {
                             })}
                         </Input>
                         <ButtonToolbar>
-                            <Input type="submit" value="提交" standalone onClick={(e)=>this.handleClick(e)}/>
+                            <Input type="submit" value={this.state.btnTxt} standalone
+                                   onClick={(e)=>this.handleClick(e)}/>
                             <Input type="reset" value="重置" amStyle="danger" standalone/>
                         </ButtonToolbar>
                     </form>
@@ -102,29 +106,43 @@ class ManageData extends React.Component {
                 A_delListAsync(listId);
             }
             if (target.className === 'edit') {
-                /////这里功能没完成
-                A_listIsEdit(true)
+                A_listIsEdit(true);
+                const link = target.getAttribute('data-url');
+                const name = target.getAttribute('data-name');
+                const classid = target.getAttribute('data-classid');
+                this.setState({listId: listId, name: name, link: link, classid: classid, btnTxt: '保存'})
             }
         }
     }
 
     handleClick(e) {
         e.preventDefault();
-        const {A_addListAsync}=this.props;
+        const {A_addListAsync,isEdit,A_listIsEdit,A_editListAsync}=this.props;
+        const listId = this.state.listId;
         const name = this.state.name;
         const link = this.state.link;
         const classid = this.state.classid;
-        A_addListAsync(name, classid, link);
+        if (name == '' || link == '') {
+            alert('输入名称和链接');
+            return;
+        }
+        if (isEdit) {
+            A_editListAsync(listId, name, classid, link);
+        } else {
+            A_addListAsync(name, classid, link);
+            A_listIsEdit(false);
+        }
+        this.setState({btnTxt: '添加', listId: '', name: '', link: '', classid: ''})
     }
 }
 function mapStateToProps(state) {
     return {
         list: state.listManage.R_getList,
         classList: state.classManage.R_classList,
-        isEdit:state.listManage.R_listIsEdit
+        isEdit: state.listManage.R_listIsEdit
     }
 }
 export default connect(
     mapStateToProps,
-    {A_getListAsync, A_addListAsync, A_delListAsync,A_listIsEdit}
+    {A_getListAsync, A_addListAsync, A_delListAsync, A_listIsEdit, A_editListAsync}
 )(ManageData)
